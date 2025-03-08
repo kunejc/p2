@@ -19,13 +19,13 @@ void printNumber(int sum) {
 }
 
 int main() {
-
+    
     int a = 0;
     int apredznak = 1;
     int b = 0;
     int bpredznak = 1;
     int sum;
-
+    
     char x;
     x = getchar();
     if (x == '-') {
@@ -48,10 +48,11 @@ int main() {
         b = b * 10 + (x-48);
         x = getchar();
     }
-
+    
     sum = apredznak*a + bpredznak*b;
-
+    
     printNumber(sum);
-
+    putchar('\n');
+    
     return 0;
 }
