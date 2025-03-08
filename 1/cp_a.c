@@ -13,9 +13,9 @@ void printNumber(int sum) {
     }
 
     if (sum / 10) {
-        printNumber(sum / 10);
+        print_number(sum / 10);
     }
-    putchar((sum % 10) + 48);
+    putchar((sum % 10) + '0');
 }
 
 int main() {
