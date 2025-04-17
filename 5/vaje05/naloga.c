@@ -24,7 +24,20 @@ void indeksInKazalec(int* t, int* indeks, int** kazalec) {
 }
 
 void frekvenceCrk(char* niz, int** frekvence) {
-    // dopolnite ...
+    // char a = 'Z'; // 97a - 122z, 65A-90Z
+
+    *frekvence = calloc(26, sizeof(int));
+
+
+    while(*niz != '\0') {
+        if (*niz < 95){
+            (*frekvence)[*niz-'A']++;
+        }
+        else (*frekvence)[*niz-'a']++;
+        
+        niz++;
+    }
+    
 }
 
 #ifndef test
