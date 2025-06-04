@@ -30,25 +30,23 @@ Vozlisce* vstaviUrejenoI(Vozlisce* zacetek, int element) {
     novoVozlisce->podatek = element;
     novoVozlisce->naslednje = NULL;
 
-    if (trenutno->podatek > element)
-    {
-        zacetek = novoVozlisce;
-        novoVozlisce->naslednje = trenutno;
+     if (zacetek == NULL || zacetek->podatek >= element) {
+        novoVozlisce->naslednje = zacetek;
+        return novoVozlisce;
     }
     
-    while (trenutno->naslednje->podatek < element)
-    {
+    while (trenutno->naslednje != NULL) {
+        if (trenutno->naslednje->podatek > element) {
+            novoVozlisce->naslednje = trenutno->naslednje;
+            trenutno->naslednje = novoVozlisce;
+            return zacetek;
+        }      
         trenutno = trenutno->naslednje;
     }
-    novoVozlisce->naslednje = trenutno->naslednje;
-    trenutno->naslednje = novoVozlisce;
-    
+    trenutno->naslednje=novoVozlisce;
 
 
-
-
-
-    return NULL;
+    return zacetek;
 }
 
 Vozlisce* vstaviUrejenoR(Vozlisce* zacetek, int element) {
