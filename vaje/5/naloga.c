@@ -1,50 +1,52 @@
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <limits.h>
 
 #include "naloga.h"
 
 int vsota(int* zac, int* kon) {
-    int sum = 0;
-    while (zac!=kon) {
-        sum += *zac;
+    int sum = *zac;
+    while (zac != kon)      
+    {
         zac++;
+        sum += *zac;
     }
-    sum += *zac;
-    
-
     return sum;
 }
 
-void indeksInKazalec(int* t, int* indeks, int** kazalec) {
-    if(*indeks == -1) *indeks = *kazalec-t;
-    else *kazalec = &t[*indeks];
-
+void indeksInKazalec(int* t, int* index, int** kazalec) {
+    if(*index == -1) *index = *kazalec - t;
+    else *kazalec = &t[*index];
 
 }
 
 void frekvenceCrk(char* niz, int** frekvence) {
-    // char a = 'Z'; // 97a - 122z, 65A-90Z
-
-    *frekvence = calloc(26, sizeof(int));
-
-
-    while(*niz != '\0') {
-        if (*niz < 95){
-            (*frekvence)[*niz-'A']++;
+    int *pogostost = malloc(26*sizeof(int));
+    *frekvence = pogostost;
+    for (size_t i = 0; i < strlen(niz); i++)
+    {
+        if ((niz[i]>=97 && niz[i]<=122)  ||  (niz[i]>=65 && niz[i]<=90))
+        {
+            if(niz[i] - 'a' < 0) pogostost[niz[i]-'A']++;
+            else pogostost[niz[i]-'a']++;
         }
-        else (*frekvence)[*niz-'a']++;
-        
-        niz++;
-    }
+    } 
     
+    
+
+
+
+
 }
 
 #ifndef test
 
 int main() {
     // int seznam[] = {2,3, 1, 1, 1, 1, 2}; //sum = 11
-    // printf("sum= %d\n", vsota(seznam, &seznam[5]));
+    // printf("sum= %d\n", vsota(seznam, &seznam[1]));
 
 
     return 0;
