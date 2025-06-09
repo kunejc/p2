@@ -10,53 +10,37 @@
 
 
 int main(){
-    int stDatotek;
-    scanf("%d", &stDatotek);
-
-    int *stevila = calloc(MAX_STEVILO, sizeof(int));
-
-    char bufferIme[MAX_IME_DAT];
-    int  bufferStevilo;
-    
-
-
-    for (size_t i = 0; i < stDatotek; i++)
+    int n, x;
+    scanf("%d", &n);
+    FILE **vhodne = malloc(n*sizeof(FILE*));
+    int *stevila = calloc(MAX_STEVILO+1, sizeof(int));
+    char bufferVhodov[101];
+    char buffer[101];
+    for (size_t i = 0; i < n; i++)
     {
-        scanf("%s", bufferIme);
-        FILE *datoteka = fopen(bufferIme, "r");
-        
-        while (fscanf(datoteka, "%d", &bufferStevilo) != EOF)
-        {
-            if(bufferStevilo > stevila[0]) stevila[0] = bufferStevilo;
-            stevila[bufferStevilo]++;
+        scanf("%s", bufferVhodov);
+        vhodne[i] = fopen(bufferVhodov, "r");
+        while (fgets(buffer, sizeof(buffer), vhodne[i]) != NULL) {
+            sscanf(buffer, "%d", &x);
+            stevila[x]++;
+            // printf("%d = [%d]\n", x, stevila[x]);
+            if(x > stevila[0]) stevila[0] = x;
         }
         
-        
-        fclose(datoteka);            
     }
     
-    
-    scanf("%s", bufferIme);
-    FILE *izhodnaDatoteka = fopen(bufferIme, "w");
-
+    scanf("%s", buffer);
+    FILE *izhodna = fopen(buffer, "w");
     for (int i = 1; i <= stevila[0]; i++)
     {
-        while (stevila[i]!=0)
-        {
+        while(stevila[i] != 0) {
+            fprintf(izhodna, "%d\n", i);
             stevila[i]--;
-            fprintf(izhodnaDatoteka, "%d\n", i);
         }
     }
     
-    fclose(izhodnaDatoteka);
-
-
-
-
-
-
-
-
+    
+    // printf("0 = %d\n", stevila[0]);
 
 
 

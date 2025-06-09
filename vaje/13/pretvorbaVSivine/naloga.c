@@ -7,38 +7,73 @@
 
 
 int main(int argc, char *argv[]) {
-    FILE *vhodnaDat = fopen(argv[1], "r");
-    FILE *izhodnaDat = fopen(argv[2], "w");
-
-    char buffer[100];
+    FILE *vhodna = fopen(argv[1], "rb");
+    FILE *izhodna = fopen(argv[2], "wb");
     int sirina, visina;
-    uint8_t *rgb = malloc(3*sizeof(uint8_t));
-    uint8_t sivina;
+    char buffer[100];
+    uint8_t rgbs[4];
 
-    //beri/beri header
-    fgets(buffer, 100, vhodnaDat); //P6
-    fputs("P5\n", izhodnaDat);
+    // printf("test");
+
+    fgets(buffer, sizeof(buffer), vhodna); //P6
+    fputs("P5\n", izhodna);
     
-    fgets(buffer, 100, vhodnaDat); sscanf(buffer, "%d %d", &sirina, &visina);//v s 
-    fputs(buffer, izhodnaDat);
+    fgets(buffer, sizeof(buffer), vhodna); //v s
+    sscanf(buffer, "%d %d", &sirina, &visina);
+    fputs(buffer, izhodna);
     
-    fgets(buffer, 100, vhodnaDat); //255
-    fputs(buffer, izhodnaDat);
- 
-    for (size_t i = 0; i < sirina*visina; i++)
+    fgets(buffer, sizeof(buffer), vhodna); //255
+    fputs(buffer, izhodna);
+
+    size_t maxIndex = sirina * visina;
+    // printf("maxIndex = %ld", maxIndex);
+    
+    for (size_t i = 0; i < maxIndex; i++)
     {
-        fread(&rgb[0], sizeof(uint8_t), 1, vhodnaDat);
-        fread(&rgb[1], sizeof(uint8_t), 1, vhodnaDat);
-        fread(&rgb[2], sizeof(uint8_t), 1, vhodnaDat);
-
-        sivina = (30*rgb[0] + 59*rgb[1] + 11*rgb[2])/100;
-
-        fwrite(&sivina, sizeof(uint8_t), 1, izhodnaDat);
+        fread(&rgbs[0], sizeof(uint8_t), 1, vhodna);
+        fread(&rgbs[1], sizeof(uint8_t), 1, vhodna);
+        fread(&rgbs[2], sizeof(uint8_t), 1, vhodna);
+        rgbs[3] = (30*rgbs[0] + 59*rgbs[1] + 11*rgbs[2])/100;
+        fwrite(&rgbs[3], sizeof(uint8_t), 1, izhodna);
     }
     
+    fclose(vhodna);
+    fclose(izhodna);
+    
 
 
-    fclose(vhodnaDat);
-    fclose(izhodnaDat);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return 0;
 }
