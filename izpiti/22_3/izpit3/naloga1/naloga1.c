@@ -32,13 +32,48 @@ ref*.pgm: pri"cakovana izhodna slika
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdint.h>
 
 // Lahko dodate "se kak #include, pomo"zno funkcijo ipd.
 
 //============================================================================
 
 int main(int argc, char** argv) {
-    // dopolnite ...
+
+    FILE* vhodna = fopen(argv[1], "rb");
+    FILE* izhodna = fopen(argv[3], "wb");
+    int prag, sirina, visina;
+    sscanf(argv[2], "%d", &prag);
+    
+    char buffC[100];
+    uint8_t buffN;
+    
+    fgets(buffC, 100*sizeof(char), vhodna); //P5
+    fputs(buffC, izhodna);
+    
+    fgets(buffC, 100*sizeof(char), vhodna); //w h
+    sscanf(buffC, "%d %d", &sirina, &visina);
+    fputs(buffC, izhodna);
+    
+    fgets(buffC, 100*sizeof(char), vhodna); //255
+    fputs(buffC, izhodna);
+    
+    while (fread(&buffN, sizeof(uint8_t), 1, vhodna) == 1)   
+    {
+        if (buffN >= prag) buffN = 255;
+        else buffN = 0;
+        fwrite(&buffN, sizeof(uint8_t), 1, izhodna);
+
+    }
+    
+
+
+
+
+
+
+
+
 
     return 0;
 }

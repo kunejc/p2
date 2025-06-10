@@ -36,34 +36,55 @@ test*.res: dejanski izhod testnega programa (pri poganjanju z make)
 
 //============================================================================
 
-void vstaviH1(Vozlisce* zacetek) {
-    Vozlisce* node = zacetek;
-    bool prejsnjaPrzna = true;
-    char* vrstica = calloc(2000, sizeof(char));
-    do {
-        if (node->naslednje == NULL)
-        {
-            if (prejsnjaPrzna && strcmp(node->niz, "") != 0)
-            {
-                sprintf(vrstica, "<h1>%s</h1>", node->niz);
-                strcpy(node->niz, vrstica);
-                prejsnjaPrzna = false;
-            }
-            break;
-        }
-        if (strcmp(node->niz, "") != 0)
-        {
-            if (prejsnjaPrzna && strcmp(node->naslednje->niz, "") == 0)
-            {   
-                    sprintf(vrstica, "<h1>%s</h1>", node->niz);
-                    strcpy(node->niz, vrstica);
-            }
-            prejsnjaPrzna = false;
-        }
-        else prejsnjaPrzna = true;
-        node = node->naslednje;
-    } while (true);
+void vNaslov(char *niz){
+    char *pred = "<h1>";
+    char *po = "</h1>";
+    char zacasna[1001];
+    strcpy(zacasna, niz);
     
+    strcpy(niz, pred);
+    strcat(niz, zacasna);
+    strcat(niz, po);
+
+    // free(pred);
+    // free(po);
+}
+
+
+
+
+
+
+void vstaviH1(Vozlisce* zacetek) {
+    Vozlisce *trenutno = zacetek;
+    int prejsnje = 0;
+
+    while (trenutno->naslednje != NULL)
+    {
+        if (strlen(trenutno->niz) > 0)
+        {
+            if (prejsnje == 0 && strlen(trenutno->naslednje->niz)==0)
+            {
+                vNaslov(trenutno->niz);
+            }
+            prejsnje = 1;
+        }
+        else prejsnje = 0;
+        
+        trenutno = trenutno->naslednje;        
+    }
+    if (strlen(trenutno->niz) > 0)
+    {
+
+        if (prejsnje == 0)
+        {
+            vNaslov(trenutno->niz);
+        }
+    }
+    
+
+
+
 
 
 
