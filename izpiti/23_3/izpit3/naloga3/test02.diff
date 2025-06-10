@@ -1,0 +1,17 @@
+1c1
+< 
+---
+> fedcba
+3,4c3,11
+< f
+< 
+---
+>  edcba
+>  e
+>   dcba
+>   d
+>    cba
+>    c
+>     ba
+>     b
+>      a
