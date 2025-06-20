@@ -32,10 +32,6 @@ Zunanje* porazdeli(Notranje* zacetek, int k) {
     
     Zunanje **rezultat = calloc(k, sizeof(Zunanje*));
     rezultat[0] = malloc(sizeof(Zunanje));
-    // rezultat[0]->prvo = NULL;
-    // rezultat[0]->zadnje = NULL;
-    // rezultat[0]->dol = NULL;
-
     Zunanje *izhod = rezultat[0];
 
     for (size_t i = 1; i < k; i++)
@@ -51,30 +47,22 @@ Zunanje* porazdeli(Notranje* zacetek, int k) {
     
 
     Notranje *trenutno = zacetek;
-    for (size_t i = 0; i < k; i++)
-    {
+    // Prvi k elementov: vsakemu zunanjemu svoja glava
+    for (size_t i = 0; i < k; i++) {
+        if (trenutno == NULL) break;
         rezultat[i]->prvo = trenutno;
         rezultat[i]->zadnje = trenutno;
-        // rezultat[i]->prvo->desno = NULL;
-        
-        if(trenutno->desno == NULL) break;
         trenutno = trenutno->desno;
+        rezultat[i]->zadnje->desno = NULL; // prekinemo povezavo naprej
     }
-    while (1)
-    {   
-        
-        for (size_t i = 0; i < k; i++)
-        {
-            
+
+    while (trenutno != NULL) {
+        for (size_t i = 0; i < k && trenutno != NULL; i++) {
             rezultat[i]->zadnje->desno = trenutno;
             rezultat[i]->zadnje = trenutno;
             trenutno = trenutno->desno;
-            rezultat[i]->zadnje->desno = NULL;
-            
-            if(trenutno == NULL) break;
+            rezultat[i]->zadnje->desno = NULL; // prekinemo povezavo naprej
         }
-        
-        if(trenutno == NULL) break;
     }
     for (size_t i = 0; i < k; i++)
     {

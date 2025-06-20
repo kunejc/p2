@@ -31,6 +31,7 @@
 Zunanje* porazdeli(Notranje* zacetek, int k) {
     
     Zunanje **rezultat = calloc(k, sizeof(Zunanje*));
+    
     rezultat[0] = malloc(sizeof(Zunanje));
     Zunanje *izhod = rezultat[0];
 

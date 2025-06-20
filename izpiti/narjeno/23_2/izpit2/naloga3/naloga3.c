@@ -29,55 +29,137 @@
     
 // }
 // kopirajVozlisce(rezultat[n], trenutno);
-
-
 Vozlisce* diagonala(Vozlisce* start, int* vsota) {
-    int vsebine[100];
-    int n = 0;
-    int sirina = 0;
+
+    int visina = 0, sirina = 0;
+
     Vozlisce *trenutno = start;
-    while (trenutno->desno != NULL) {
+
+    while (trenutno != NULL)
+    {
         trenutno = trenutno->desno;
         sirina++;
     }
-    vsebine[n] = trenutno->vsebina;
     trenutno = start;
-    while (trenutno->dol != NULL && sirina>0)
+    while (trenutno != NULL)
     {
-        n++;
-        trenutno = start;
-        for (size_t i = 0; i < n; i++)
-        {
-            trenutno = trenutno->dol;
-        }
-        for (size_t i = 0; i < sirina-1; i++)
-        {
-            trenutno = trenutno->desno;
-        }
-        sirina--;
-        vsebine[n] = trenutno->vsebina;
+        trenutno = trenutno->dol;
+        visina++;
     }
     
-    *vsota = 0;
-    Vozlisce **rezultat = malloc((n+1)*sizeof(Vozlisce*));
-    for (size_t i = 0; i <= n; i++)
-    {
-        rezultat[i] = malloc(sizeof(Vozlisce));
 
-        rezultat[i]->dol = NULL;
 
-        rezultat[i]->vsebina = vsebine[i];
-        *vsota += vsebine[i];
 
-        if (i > 0)
-        {
-            rezultat[i-1]->desno = rezultat[i];
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Vozlisce* diagonala(Vozlisce* start, int* vsota) {
+//     int vsebine[100];
+//     int n = 0;
+//     int sirina = 0;
+//     Vozlisce *trenutno = start;
+//     while (trenutno->desno != NULL) {
+//         trenutno = trenutno->desno;
+//         sirina++;
+//     }
+//     vsebine[n] = trenutno->vsebina;
+//     trenutno = start;
+//     while (trenutno->dol != NULL && sirina>0)
+//     {
+//         n++;
+//         trenutno = start;
+//         for (size_t i = 0; i < n; i++)
+//         {
+//             trenutno = trenutno->dol;
+//         }
+//         for (size_t i = 0; i < sirina-1; i++)
+//         {
+//             trenutno = trenutno->desno;
+//         }
+//         sirina--;
+//         vsebine[n] = trenutno->vsebina;
+//     }
+    
+//     *vsota = 0;
+//     Vozlisce **rezultat = malloc((n+1)*sizeof(Vozlisce*));
+//     for (size_t i = 0; i <= n; i++)
+//     {
+//         rezultat[i] = malloc(sizeof(Vozlisce));
+
+//         rezultat[i]->dol = NULL;
+
+//         rezultat[i]->vsebina = vsebine[i];
+//         *vsota += vsebine[i];
+
+//         if (i > 0)
+//         {
+//             rezultat[i-1]->desno = rezultat[i];
+//         }
         
 
-    }
-    return rezultat[0];
-}
+//     }
+//     return rezultat[0];
+// }
 
 //=============================================================================
 

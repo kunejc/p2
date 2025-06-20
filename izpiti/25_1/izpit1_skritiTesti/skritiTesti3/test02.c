@@ -74,7 +74,7 @@ int main() {
 
     Notranje* zacetek = zgradi(TABELA, n);
 
-    printf("Vhod: /%d/ ", n);
+    printf("Vhod: ");
     izpisiNotranje(zacetek);
     printf("\n");
 
